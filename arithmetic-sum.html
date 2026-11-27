@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ja"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>等比数列の和 ― かっこと累乗の書き方</title>
+  
+  <style>
+    :root{--ink:#17312d;--muted:#526b65;--paper:#f4f7f1;--green:#146b55;--lime:#d9edab;--line:#d9e2d7}
+    *{box-sizing:border-box} body{margin:0;color:var(--ink);font-family:"Source Sans Pro",sans-serif}
+    .app-shell{width:100%;min-height:100%;background:radial-gradient(circle at 90% 0%,#e0edcd 0%,transparent 35%),var(--paper)}
+    .display-font{font-family:"Work Sans",sans-serif}
+    .step-card{border:1px solid var(--line);background:#fff;border-radius:20px;padding:clamp(18px,3vw,28px);box-shadow:0 5px 18px #17312d08}
+    .step-card[hidden]{display:none}
+    .math-scroll{overflow-x:auto;padding:10px 2px 14px;scrollbar-color:#a6bcb2 transparent}
+    .math{display:inline-flex;align-items:center;gap:.18em;white-space:nowrap;font-family:"Source Sans Pro",sans-serif;font-size:clamp(1.35rem,4vw,2rem);font-weight:600;line-height:1.25}
+    .frac{display:inline-flex;vertical-align:middle;flex-direction:column;align-items:center;text-align:center;font-size:.88em;line-height:1.35}
+    .frac>.top{border-bottom:1.7px solid currentColor;padding:0 .24em .13em;min-width:1.4em}
+    .frac>.bottom{padding:.13em .24em 0}
+    .frac .frac{font-size:.84em}
+    sup{font-size:.67em;line-height:0;vertical-align:super}
+    .focus-piece{border-radius:5px;padding:2px 3px;margin:-2px -3px;transition:background .25s,box-shadow .25s}
+    .focus-piece.active{background:#ffe49a;box-shadow:0 0 0 2px #e8aa41}
+    .focus-piece.active .focus-piece{box-shadow:none}
+    .choice{background:white!important;color:var(--ink)!important}.choice[aria-pressed="true"]{background:var(--green)!important;color:white!important;border-color:var(--green)}
+    button:focus-visible{outline:3px solid #d28a22;outline-offset:3px}
+    .reveal{animation:rise .35s ease both}@keyframes rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+    @media(max-width:520px){.math{font-size:1.35rem}.step-card{border-radius:16px}}
+    @media(prefers-reduced-motion:reduce){.reveal{animation:none}*{scroll-behavior:auto!important}}
+  
+main{max-width:896px;margin:auto;padding:32px 20px 48px}body{font-family:system-ui,"Yu Gothic",Meiryo,sans-serif}.math{font-family:"Cambria Math","Times New Roman",serif}.display-font{font-family:inherit}.flex{display:flex}.flex-wrap{flex-wrap:wrap}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-2{gap:8px}.gap-3{gap:12px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-5{margin-bottom:20px}.mb-7{margin-bottom:28px}.mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.mt-5{margin-top:20px}.mt-6{margin-top:24px}.p-5{padding:20px}.px-3{padding-left:12px;padding-right:12px}.px-4{padding-left:16px;padding-right:16px}.px-6{padding-left:24px;padding-right:24px}.py-2{padding-top:8px;padding-bottom:8px}.py-3{padding-top:12px;padding-bottom:12px}.pt-4{padding-top:16px}.rounded-lg{border-radius:8px}.rounded-xl{border-radius:12px}.rounded-2xl{border-radius:16px}.border{border:1px solid #cbd5cf}.border-t{border-top:1px solid #d9e2d7}.bg-white{background:white}.bg-amber-50{background:#fffbeb}.leading-relaxed{line-height:1.75}.font-bold{font-weight:700}.font-semibold{font-weight:600}.text-sm{font-size:14px}.text-lg{font-size:18px}.text-red-800,.text-red-900{color:#991b1b}.space-y-4>*+*{margin-top:16px}button{font:inherit;cursor:pointer;min-height:46px}button:disabled{opacity:.5;cursor:default}nav{position:sticky;bottom:8px;background:#f4f7f1f5;padding:10px;border:1px solid #d9e2d7;border-radius:14px}summary{cursor:pointer;font-weight:700;line-height:1.8}th{text-align:left}#problem-values{align-items:center}#highlight-description{line-height:1.8}@media(min-width:640px){nav{flex-direction:row}main{padding:48px 32px}}</style>
+  
+  
+  
+  
+  
+ <script>
+window.MathJax={loader:{load:['[tex]/bbox']},tex:{packages:{'[+]':['bbox']}},startup:{typeset:false,pageReady:()=>MathJax.startup.defaultPageReady().then(()=>{window.texReady=true;if(window.refreshTex)window.refreshTex()})}};
+</script><script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<style>html,body,main{overflow-anchor:none}html{scroll-behavior:auto}.math{display:inline-block;vertical-align:middle}.math sub{font-size:.65em;vertical-align:sub;line-height:0;position:relative;bottom:-.15em}.quiz-options{display:grid;gap:12px}.quiz-choice{display:block;width:100%;text-align:left;background:#fff;border:2px solid #bdcec3;border-radius:12px;padding:14px;overflow-x:auto}.quiz-choice[aria-pressed="true"]{border-color:#146b55;background:#edf7ef}.quiz-choice:disabled{opacity:1;cursor:default}#quiz-feedback{line-height:1.8;margin-top:14px}.math mjx-container{margin:0!important}mjx-container{max-width:100%}.quiz-label{display:block;font-weight:700;color:#146b55;margin-bottom:10px}</style><style>.toolbar{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.step-card{margin-top:18px}button{border-radius:10px;padding:12px 18px;border:1px solid #b5cabc;background:white;color:#17312d}.primary{background:#146b55;color:white}.notes{background:#fffbeb;padding:14px;border-radius:12px;line-height:1.8}a{color:#146b55}.condition{display:flex;gap:20px;flex-wrap:wrap;align-items:center}.lesson-title{font-size:clamp(26px,5vw,36px);line-height:1.5}.math-scroll{min-height:70px}#quiz-feedback{min-height:32px}summary{cursor:pointer}</style></head>
+ <body><main id="main"><header><a href="index.html">数列の公式 トップ</a><h1 id="title" class="lesson-title"></h1><p>公式と代入した式を見比べ、括弧・掛け算・累乗の範囲を確かめましょう。</p></header>
+
+<section class="step-card" id="problem"><strong>今回の問題</strong> <span id="counter"></span><div class="condition" id="condition"></div></section>
+<section class="step-card" id="step1" hidden><h2>① 使用する公式</h2><div class="math-scroll" id="formula"></div><p id="legend"></p><p id="formula-reason"></p></section>
+<section class="step-card" id="step2" hidden><h2>② 数値を代入</h2><div class="math-scroll" id="substitute"></div></section>
+<section class="step-card" id="step3" hidden><h2>③ 式の書き方</h2><div class="math-scroll" id="highlight"></div><div class="notes" id="explanation"></div><section id="quiz" hidden><h2>確認問題：正しい式はどちら？</h2><div class="quiz-options" id="choices"></div><div id="quiz-feedback" aria-live="polite"></div></section><p>括弧の種類より、囲む範囲が大切です。中括弧は内側の括弧と区別するために使います。</p></section>
+<section class="step-card" id="step4" hidden><h2>④ 計算した答え</h2><div class="math-scroll" id="answer"></div></section>
+<nav class="toolbar"><button class="primary" id="advance">解説を進める</button><button id="next">次の問題</button></nav></main><script>
+const TYPE='arithmeticSum';
+const META={arithmeticTerm:{name:'等差数列の一般項',symbol:'a',form:'a<sub>n</sub> = a + (n − 1)d'},arithmeticSum:{name:'等差数列の和',symbol:'S',form:'S<sub>n</sub> = '+frac('n{2a + (n − 1)d}','2')},geometricTerm:{name:'等比数列の一般項',symbol:'a',form:'a<sub>n</sub> = ar<sup>n − 1</sup>'}};
+const meta=META[TYPE],isGeom=TYPE==='geometricTerm',isSum=TYPE==='arithmeticSum';
+const $=id=>document.getElementById(id), math=t=>`<span class="math">${t}</span>`;
+function gcd(a,b){while(b)[a,b]=[b,a%b];return Math.abs(a)||1}
+function rat(p,q=1){if(q<0){p=-p;q=-q}let g=gcd(p,q);return {p:p/g,q:q/g}}
+function add(a,b){return rat(a.p*b.q+b.p*a.q,a.q*b.q)}
+function mul(a,b){return rat(a.p*b.p,a.q*b.q)}
+function frac(a,b){return `<span class="frac"><span class="top">${a}</span><span class="bottom">${b}</span></span>`}
+function num(v){if(typeof v==='number')v=rat(v);return v.q===1?String(v.p).replace('-','−'):(v.p<0?'−':'')+frac(Math.abs(v.p),v.q)}
+function grouped(v){return v.p<0||v.q!==1?`(${num(v)})`:num(v)}
+function marked(t,k){return `<span class="focus-piece${stage===3&&focus===k?' active':''}">${t}</span>`}
+function factor(v){return v.p<0||v.q!==1?`(${num(v)})`:num(v)}
+function polynomial(c,b){let out=c.p===0?'':(c.p===c.q?'':c.p===-c.q?'−':num(c))+'n';if(b.p!==0)out+=(out?(b.p<0?' − ':' + '):(b.p<0?'−':''))+num(rat(Math.abs(b.p),b.q));return out||'0'}
+const source=[];
+if(isGeom){for(const [p,q] of [[2,1],[-2,1],[1,2],[-1,2],[3,1],[-2,3],[1,1]])for(const n of [4,5,null])source.push({a:[3,2,4][source.length%3],v:rat(p,q),n});}
+else{for(const [p,q] of [[2,1],[-2,1],[3,1],[-3,1],[1,2],[-1,2],[0,1]])for(const n of [4,6,null])source.push({a:[3,5,2][source.length%3],v:rat(p,q),n});}
+if(isSum){const lastProblems=source.filter(x=>x.n!==null&&x.v.q===1).map(x=>({...x,given:'last'}));source.push(...lastProblems);}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+let deck=[],position=0,stage=0,focus=0,mode=0,selection=null,choiceData=null,revision=0,inputRevision=0;
+function newDeck(previous){do{deck=shuffle(source)}while(deck.some((x,i)=>isGeom&&x.v.p===x.v.q&&(i?deck[i-1].v.p===deck[i-1].v.q:previous?.v.p===previous?.v.q))||deck[0]===previous);position=0}
+newDeck();
+function eq(x){return `${meta.symbol}<sub>${x.n??'n'}</sub>`}
+function nth(x){return add(rat(x.a),mul(rat(x.n-1),x.v))}
+function resultValue(x){if(isGeom)return mul(rat(x.a),rat(x.v.p**(x.n-1),x.v.q**(x.n-1)));if(isSum)return mul(rat(x.n,2),add(rat(x.a),nth(x)));return nth(x)}
+function official(){if(isSum&&mode===1)return 'S<sub>n</sub> = '+frac('n(a + l)','2');return meta.form}
+function substitute(x,highlight=false){const m=(t,k)=>highlight?marked(t,k):t,n=x.n??'n',nm=x.n===null?'n − 1':`${n} − 1`;
+ if(isGeom)return eq(x)+' = '+m(String(x.a),3)+' × '+m(m(grouped(x.v),0)+`<sup>${m(nm,1)}</sup>`,2);
+ if(isSum&&mode===1){const last=nth(x),lastText=grouped(last);return eq(x)+' = '+frac(m(n,3)+m(`{${m(String(x.a),0)} + ${m(lastText,1)}}`,2),'2');}
+ const term=m(`(${m(nm,0)}) × ${m(grouped(x.v),1)}`,2);
+ const inside=isSum?`${2} × ${x.a} + ${term}`:`${x.a} + ${term}`;
+ return eq(x)+' = '+(isSum?frac(m(n,3)+`{${inside}}`,'2'):m(inside,3));
+}
+function answer(x){if(x.n!==null)return eq(x)+' = '+num(resultValue(x));
+ if(isGeom)return eq(x)+' = '+(x.v.p===x.v.q?String(x.a):`${x.a}${grouped(x.v)}<sup>n − 1</sup>`);
+ const b=add(rat(isSum?2*x.a:x.a),mul(rat(-1),x.v));
+ return eq(x)+' = '+(isSum?frac(`n{${polynomial(x.v,b)}}`,'2'):polynomial(x.v,b));
+}
+function explanations(x){const n=x.n??'n';if(isGeom)return [
+ `公比は負号や分数も含めた全体です。${x.v.p<0||x.v.q!==1?'全体を括弧で囲みます。':'正の整数なので括弧は省けます。'}`,
+ `初項から第${n}項までは ${n}−1 回掛けるので、指数は ${n}−1 です。`,
+ '指数は公比全体の右肩に書きます。初項まで一緒に累乗しません。',
+ `最後に公比の累乗全体に初項 ${x.a} を掛けます。公比1なら、どの項も初項と同じです。`];
+ if(isSum&&mode===1)return ['初項・末項・項数が与えられているので、Sₙ = n(a+l)/2 を使います。初項を a に代入します。', '与えられた末項を l に代入します。負の末項は負号も含めて括弧で囲みます。','初項と末項の和全体を括弧で囲みます。','その和に項数 n を掛け、全体を2で割ります。'];
+ return [
+ `公差を足す回数は項数より1少ないので、${n}−1 を括弧で囲みます。`,
+ `公差は負号や分数を含む全体です。負の公差は (${(x.v.q===1?String(x.v.p):x.v.p+'/'+x.v.q)}) のように囲んで掛けます。`,
+ '括弧で囲んだ「項数−1」全体に公差を掛けます。指数ではありません。',
+ isSum?'2倍した初項と (n−1)d の和全体を中括弧で囲み、項数を掛けて2で割ります。':'公差の積に初項を足します。初項まで公差を掛けないようにします。'];}
+function makeQuiz(x){const n=x.n??'n',nm=x.n===null?'n − 1':`${n} − 1`,v=grouped(x.v),candidates=[];
+ function addBad(rhs,reason,value){candidates.push({html:eq(x)+' = '+rhs,reason,value})}
+ if(isGeom){addBad(`${x.a} × ${v}<sup>${n}</sup>`,'指数が n になっています。公比を掛ける回数は n−1 です。',x.n===null?null:mul(rat(x.a),rat(x.v.p**x.n,x.v.q**x.n)));addBad(`(${x.a} × ${v})<sup>${nm}</sup>`,'初項まで累乗しています。累乗するのは公比全体だけです。',x.n===null?null:rat((x.a*x.v.p)**(x.n-1),x.v.q**(x.n-1)));addBad(`${x.a} + (${nm}) × ${v}`,'等差数列の公式になっています。等比数列では公比を繰り返し掛けます。',x.n===null?null:nth(x));}
+ else if(isSum&&mode===1){let l=x.n===null?`${x.a}+(n−1)×${v}`:num(nth(x));addBad(`${frac(n,'2')} × ${x.a} + (${l})`,'初項と末項の和全体に n/2 を掛ける必要があります。',x.n===null?null:add(rat(x.n*x.a,2),nth(x)));addBad(`${n}{${x.a} + (${l})}`,'最後に2で割る操作が抜けています。',x.n===null?null:mul(resultValue(x),rat(2)));}
+ else if(isSum){
+ const w1=x.n===null?null:mul(rat(x.n,2),add(rat(2*x.a),mul(rat(x.n),x.v)));
+ const w2=x.n===null?null:add(rat(x.n*x.a),mul(rat(x.n-1),x.v));
+ addBad(frac(`${n}{2 × ${x.a} + ${n} × ${v}}`,'2'),'公差を足す回数が n になっています。正しくは n−1 です。',w1);
+ addBad(`${frac(n,'2')} × 2 × ${x.a} + (${nm}) × ${v}`,'外側の括弧がないため、和全体に n/2 が掛かっていません。',w2);
+ addBad(`${n}{2 × ${x.a} + (${nm}) × ${v}}`,'分母の2が抜けています。',x.n===null?null:mul(resultValue(x),rat(2)));
+ }
+ else{
+ const w1=x.n===null?null:add(rat(x.a),mul(rat(x.n),x.v));
+ const w2=x.n===null?null:mul(rat(x.a+x.n-1),x.v);
+ const w3=x.n===null?null:add(rat(x.a+x.n),mul(rat(-1),x.v));
+ addBad(`${x.a} + ${n} × ${v}`,'公差を足す回数が n になっています。正しくは n−1 です。',w1);
+ addBad(`(${x.a} + ${nm}) × ${v}`,'初項まで公差を掛けています。公差を掛けるのは n−1 全体です。',w2);
+ addBad(`${x.a} + ${n} − 1 × ${v}`,'n−1 の括弧がなく、1だけに公差が掛かっています。',w3);
+ }
+ const good=x.n===null?null:resultValue(x);
+ let valid=candidates.filter(c=>!good||c.value.p*good.q!==good.p*c.value.q);
+ // For zero common difference / ratio 1, use a guaranteed different expression.
+ if((!isGeom&&x.v.p===0)||(isGeom&&x.v.p===x.v.q))valid=valid.filter(c=>!c.reason.includes('回数'));
+ if(!valid.length)valid=[{html:eq(x)+' = 0',reason:'初項が正なので、この条件で全体が0になる式は正しくありません。'}];
+ return {slot:Math.floor(Math.random()*2),bad:valid[Math.floor(Math.random()*valid.length)]};
+}
+for(const event of ['wheel','touchstart','pointerdown','keydown'])window.addEventListener(event,()=>inputRevision++,{passive:true});
+function render(keep=true){const x=deck[position],n=x.n??'n',rev=++revision,ir=inputRevision,y=window.scrollY,main=$('main');if(keep)main.style.minHeight=main.getBoundingClientRect().height+'px';const restore=()=>{if(keep&&rev===revision&&ir===inputRevision)window.scrollTo({top:y,behavior:'instant'})};
+ mode=isSum&&x.given==='last'?1:0;
+ if(window.MathJax?.typesetClear)MathJax.typesetClear();
+ $('title').textContent=meta.name+' ― 式の書き方';document.title=meta.name+' ― 数列の公式';
+ $('counter').textContent=`${position+1} / ${deck.length}`;
+ $('condition').innerHTML=`<span>初項 ${math(x.a)}</span><span>${isSum&&x.given==='last'?'末項':'公'+(isGeom?'比':'差')} ${math(num(isSum&&x.given==='last'?nth(x):x.v))}</span><span>${x.n===null?'第 n 項まで':`第 ${x.n} 項${isSum?'まで':''}`}${isSum?'の和':'の値'}</span>`;
+ 
+ $('legend').textContent=isSum?(mode===1?'a：初項 ／ l：末項 ／ n：項数':'a：初項 ／ d：公差 ／ n：項数'):(isGeom?'a：初項 ／ r：公比 ／ n：項数':'a：初項 ／ d：公差 ／ n：項数');
+ $('formula-reason').textContent=isSum?(mode===1?'初項・末項・項数が分かっているので、この公式を使います。':'初項・公差・項数が分かっているので、この公式を使います。'):'';
+ $('formula').innerHTML=math(official());$('substitute').innerHTML=math(substitute(x));$('highlight').innerHTML=math(substitute(x,true));
+ $('explanation').innerHTML=explanations(x).slice(0,focus+1).map((t,i)=>`<p>${i+1}. ${t}</p>`).join('');$('answer').innerHTML=math(answer(x));
+ if(!choiceData)choiceData=makeQuiz(x);
+ const choices=[];choices[choiceData.slot]=substitute(x);choices[1-choiceData.slot]=choiceData.bad.html;
+ $('choices').innerHTML=choices.map((t,i)=>`<button type="button" class="quiz-choice" data-choice="${i}" aria-pressed="${selection===i}" ${selection!==null?'disabled':''}><span class="quiz-label">${i===0?'A':'B'}</span>${math(t)}</button>`).join('');
+ $('choices').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{selection=Number(b.dataset.choice);render()}));
+ $('quiz-feedback').innerHTML=selection===null?'':`<strong>${selection===choiceData.slot?'正解です。':'もう一方が正解です。'} 正しい式は ${choiceData.slot===0?'A':'B'}。</strong><p>誤りの式：${choiceData.bad.reason}</p>`;
+ for(let i=1;i<=4;i++)$('step'+i).hidden=stage<i;$('quiz').hidden=stage<3||focus<3;
+ $('advance').disabled=stage===4;$('advance').textContent=stage===4?'解説完了':stage===3&&focus<3?`解説ポイント ${focus+2} を見る`:stage===3?'④ 答えを見る':'解説を進める';
+ const pending=window.refreshTex();restore();requestAnimationFrame(restore);Promise.resolve(pending).finally(()=>{if(rev!==revision)return;main.style.minHeight='';restore();requestAnimationFrame(restore)});
+}
+$('advance').addEventListener('click',()=>{if(stage<3){stage++;focus=0}else if(focus<3)focus++;else stage=4;render()});
+$('next').addEventListener('click',()=>{let prev=deck[position];position++;if(position===deck.length)newDeck(prev);stage=0;focus=0;selection=null;choiceData=null;render(false);$('problem').scrollIntoView({behavior:'smooth',block:'start'})});
+    function htmlToTex(node){
+      if(node.nodeType===3)return node.textContent.replace(/−/g,'-').replace(/[｛｝{}]/g,c=>(c==='｛'||c==='{')?'\\{':'\\}').replace(/×/g,'\\times ');
+      if(node.nodeType!==1)return '';
+      const children=()=>Array.from(node.childNodes).map(htmlToTex).join('');
+      if(node.classList.contains('frac'))return '\\frac{'+htmlToTex(node.querySelector(':scope > .top'))+'}{'+htmlToTex(node.querySelector(':scope > .bottom'))+'}';
+      if(node.tagName==='SUP')return '^{'+children()+'}';
+      if(node.tagName==='SUB')return '_{'+children()+'}';
+      const t=children();return node.classList.contains('active')?'\\bbox[5px,border:2px solid #e8aa41,#ffe49a]{'+t+'}':t;
+    }
+    let texQueue=Promise.resolve();
+    window.refreshTex=function(){
+      if(!window.texReady||!window.MathJax?.typesetPromise)return;
+      const nodes=Array.from(document.querySelectorAll('.math')).filter(n=>!n.querySelector('mjx-container')&&!n.dataset.texQueued);
+      nodes.forEach(n=>{n.dataset.texQueued='1';const t=htmlToTex(n);n.textContent='\\('+t+'\\)'});
+      texQueue=texQueue.catch(()=>{}).then(()=>{const live=nodes.filter(n=>n.isConnected);return live.length?MathJax.typesetPromise(live):undefined}).catch(()=>{});
+      return texQueue;
+    };
+
+
+render();
+</script></body></html>
